@@ -1,0 +1,14 @@
+.link:hover {
+    color: whitesmoke !important;
+    background-color: #0879e9;
+    transition: ease-in-out;
+    border-radius: 5px;
+}
+
+.list-style-none {
+    list-style: none;
+}
+
+.pointer {
+    cursor: pointer;
+}
