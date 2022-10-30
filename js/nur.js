@@ -57,11 +57,12 @@ const showNews = fullNewsAll => {
             const cardDiv = document.createElement('div');
             cardDiv.classList.add('card');
             cardDiv.innerHTML = `
-                <img src="${fullNews.image_url}" class="card-img-top" alt="...">
+                <img src="${fullNews?.image_url} alt="No image found" class="card-img-top" alt="...">
                 <div class="card-body">
-                    <h5 class="card-title">${fullNews.title}</h5>
-                    <p class="card-text">${fullNews.details.slice(0, 150) + '...'}</p>
-                    <button onclick=newsDetails('${fullNews._id}') class="btn btn-primary rounded p-2")>Read More</button>
+                    <h5 class="card-title">${fullNews?.title}</h5>
+                    <p class="card-text">${fullNews?.details.slice(0, 150) + '...'}</p>
+                    <p class="d-flex"><img src="${fullNews?.author?.img} alt="No image found" style="max-width: 2rem; border-radius: 1rem;"><span class="fw-bolder mx-2">${fullNews?.author?.name ? fullNews?.author?.name : 'Author Unknown'}</span></p>
+                    <button onclick=newsDetails('${fullNews._id}') type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#newsModal">Read More</button>
                 </div>
             `;
             cardsContainer.appendChild(cardDiv);
@@ -83,6 +84,18 @@ const newsDetails = newsId => {
 
 const newsDetailsModal = newsData => {
     console.log(newsData);
+    const modalTitle = document.getElementById('newsModalLabel');
+    modalTitle.innerText = newsData.title;
+    const modalBody = document.getElementById('modal-body');
+    modalBody.innerHTML = `
+        <div class="card w-100">
+            <img src="${newsData.image_url}" class="card-img-top" alt="...">
+            <div class="card-body">
+                <p class="card-text">${newsData.details}</p>
+                <p><small class="text-secondary">Published on ${newsData.author.published_date} by <strong><i>${newsData.author.name}</i></strong></small></p>
+            </div>
+        </div>
+    `;
 }
 
 categoriesData();
