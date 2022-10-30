@@ -32,7 +32,7 @@ const categoryDetailView = categories => {
 }
 
 const findNewsByCategory = newsId => {
-    const cards = document.getElementById('cards');
+    const cards = document.getElementById('cards-container');
     cards.textContent = '';
     const findAllNewsByIdURL = `https://openapi.programming-hero.com/api/news/category/${newsId}`;
     fetch(findAllNewsByIdURL)
@@ -51,19 +51,38 @@ const showNews = fullNewsAll => {
     //       </div>
     //    </div>
     // </div>
-    const cards = document.getElementById('cards');
-    fullNewsAll.forEach(fullNews => {
-        const cardDiv = document.createElement('div');
-        cardDiv.classList.add('card');
-        cardDiv.innerHTML = `
-            <img src="${fullNews.image_url}" class="card-img-top" alt="...">
-            <div class="card-body">
-                <h5 class="card-title">Card title</h5>
-                <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-            </div>
+    const cardsContainer = document.getElementById('cards-container');
+    if (fullNewsAll.length > 0) {
+        fullNewsAll.forEach(fullNews => {
+            const cardDiv = document.createElement('div');
+            cardDiv.classList.add('card');
+            cardDiv.innerHTML = `
+                <img src="${fullNews.image_url}" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">${fullNews.title}</h5>
+                    <p class="card-text">${fullNews.details.slice(0, 150) + '...'}</p>
+                    <button onclick=newsDetails('${fullNews._id}') class="btn btn-primary rounded p-2")>Read More</button>
+                </div>
+            `;
+            cardsContainer.appendChild(cardDiv);
+        });
+    }
+    else {
+        cardsContainer.innerHTML = `
+            <h2 class="w-100 text-danger">No News Found in this category!!!</h2>
         `;
-        cards.appendChild(cardDiv);
-    });
+    }
+}
+
+const newsDetails = newsId => {
+    const newsDetailsUrl = `https://openapi.programming-hero.com/api/news/${newsId}`
+    fetch(newsDetailsUrl)
+        .then(res => res.json())
+        .then(data => newsDetailsModal(data.data[0]))
+}
+
+const newsDetailsModal = newsData => {
+    console.log(newsData);
 }
 
 categoriesData();
