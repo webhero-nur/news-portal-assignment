@@ -5,31 +5,33 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Top Blogs</title>
+    <title>News Today</title>
     <!-- bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
     <!-- custom css -->
     <link rel="stylesheet" href="css/style.css">
+    <script src="https://kit.fontawesome.com/0a356bbaa5.js" crossorigin="anonymous"></script>
 </head>
 
 <body>
     <!-- header part -->
     <header class="container">
         <!-- navbar -->
-        <nav class="navbar navbar-expand-lg bg-light d-flex justify-content-center mx-5">
+        <nav class="navbar navbar-expand-lg bg-light d-flex justify-content-center">
             <div class="container-fluid">
                 <a class="navbar-brand fw-bold fs-2" href="#"><span
-                        class="text-light bg-primary rounded p-1">News</span>
-                    Today</a>
+                        class="text-light bg-primary rounded p-1">News</span> Today</a>
             </div>
-            <div class="d-flex">
-                <a class="fw-semibold nav-link px-2 fs-4 text-secondary" href="index.html">News</a>
-                <a class="fw-semibold nav-link ps-2 fs-4 pe-4" href="#">Blog</a>
+            <div class="d-flex me-4">
+                <a class="fw-semibold nav-link px-2 fs-4 mx-1 link rounded" href="#">News</a>
+                <a class="fw-semibold nav-link px-2 fs-4 mx-1 link rounded text-secondary" href="blog.html">Blog</a>
             </div>
         </nav>
+        <hr>
         <!-- news category -->
-        <div></div>
+        <div id="news-categories" class="container">
+        </div>
     </header>
     <!-- main content start -->
     <main class="container">
@@ -116,7 +118,7 @@
     </main>
     <!-- footer start -->
     <footer class="align-items-center bg-light d-flex justify-content-center" style="height: 100px;">
-        <p class="text-secondary fw-semibold fs-4">Copyright 2022 © News Today</p>
+        <p class="text-secondary fw-semibold fs-4 mb-0">Copyright 2022 © News Today</p>
     </footer>
 
     <!-- scripts -->
@@ -125,6 +127,10 @@
         integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3"
         crossorigin="anonymous"></script>
     <!-- custom scripts -->
+    <script src="js/nur.js"></script>
+
+    <!-- fontawesome -->
+    <script src="https://kit.fontawesome.com/0a356bbaa5.js" crossorigin="anonymous"></script>
 </body>
 
 </html>
