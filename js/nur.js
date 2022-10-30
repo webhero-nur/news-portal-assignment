@@ -10,13 +10,13 @@ const categoryDetailView = categories => {
     const categoriesDiv = document.createElement('div');
 
     const categoryUl = document.createElement('ul');
-    categoryUl.classList.add('list-style-none', 'd-flex', 'justify-content-between', 'fw-semibold', 'bg-light', 'px-4', 'py-2', 'mb-0');
+    categoryUl.classList.add('list-style-none', 'd-md-flex', 'text-center', 'justify-content-between', 'fw-semibold', 'bg-light', 'px-4', 'py-2', 'mb-0');
     categoriesDiv.appendChild(categoryUl);
 
     const homeLi = document.createElement('li');
     homeLi.classList.add('pointer', 'px-1');
     homeLi.innerHTML = `
-        <div onclick=findNewsByCategory('home')>Home</div>
+        <div onclick=homeTab()>Home</div>
     `;
     categoryUl.appendChild(homeLi);
 
@@ -47,13 +47,13 @@ const showNews = fullNewsAll => {
             const cardDiv = document.createElement('div');
             cardDiv.classList.add('card');
             cardDiv.innerHTML = `
-                <img src="${fullNews?.image_url} alt="No image found" class="card-img-top" alt="...">
+                <img src="${fullNews?.image_url}" alt="No image found" class="card-img-top" alt="...">
                 <div class="card-body">
                     <h5 class="card-title">${fullNews?.title}</h5>
                     <p class="card-text">${fullNews?.details.slice(0, 150) + '...'}</p>
                     <div class="d-flex justify-content-between py-2">
                         <div class="d-flex">
-                            <img src="${fullNews?.author?.img} alt="No image found" style="max-width: 2rem; border-radius: 1rem;">
+                            <img src="${fullNews?.author?.img}" alt="No image found" style="max-width: 2rem; border-radius: 1rem;">
                             <span class="fw-bolder mx-2">${fullNews?.author?.name ? fullNews?.author?.name : 'Author Unknown'}</span>
                         </div>
                         <span><i class="fa-solid fa-eye"></i> ${fullNews?.total_view ? fullNews?.total_view : 'Not Enough View'}K</span>
