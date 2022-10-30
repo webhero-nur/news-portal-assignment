@@ -41,16 +41,6 @@ const findNewsByCategory = newsId => {
 }
 
 const showNews = fullNewsAll => {
-    console.log(fullNewsAll);
-    // <div class="col">
-    //    <div class="card">
-    //       <img src="..." class="card-img-top" alt="...">
-    //       <div class="card-body">
-    //          <h5 class="card-title">Card title</h5>
-    //          <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-    //       </div>
-    //    </div>
-    // </div>
     const cardsContainer = document.getElementById('cards-container');
     if (fullNewsAll.length > 0) {
         fullNewsAll.forEach(fullNews => {
@@ -61,7 +51,14 @@ const showNews = fullNewsAll => {
                 <div class="card-body">
                     <h5 class="card-title">${fullNews?.title}</h5>
                     <p class="card-text">${fullNews?.details.slice(0, 150) + '...'}</p>
-                    <p class="d-flex"><img src="${fullNews?.author?.img} alt="No image found" style="max-width: 2rem; border-radius: 1rem;"><span class="fw-bolder mx-2">${fullNews?.author?.name ? fullNews?.author?.name : 'Author Unknown'}</span></p>
+                    <div class="d-flex justify-content-between py-2">
+                        <div class="d-flex">
+                            <img src="${fullNews?.author?.img} alt="No image found" style="max-width: 2rem; border-radius: 1rem;">
+                            <span class="fw-bolder mx-2">${fullNews?.author?.name ? fullNews?.author?.name : 'Author Unknown'}</span>
+                        </div>
+                        <span><i class="fa-solid fa-eye"></i> ${fullNews?.total_view ? fullNews?.total_view : 'Not Enough View'}K</span>
+                        <span><i class="fa-solid fa-star"></i> ${fullNews.rating.number}</span>
+                    </div>
                     <button onclick=newsDetails('${fullNews._id}') type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#newsModal">Read More</button>
                 </div>
             `;
@@ -83,7 +80,6 @@ const newsDetails = newsId => {
 }
 
 const newsDetailsModal = newsData => {
-    console.log(newsData);
     const modalTitle = document.getElementById('newsModalLabel');
     modalTitle.innerText = newsData.title;
     const modalBody = document.getElementById('modal-body');
@@ -92,7 +88,7 @@ const newsDetailsModal = newsData => {
             <img src="${newsData.image_url}" class="card-img-top" alt="...">
             <div class="card-body">
                 <p class="card-text">${newsData.details}</p>
-                <p><small class="text-secondary">Published on ${newsData.author.published_date} by <strong><i>${newsData.author.name}</i></strong></small></p>
+                <p><small class="text-secondary">Published on ${newsData?.author?.published_date ? newsData?.author?.published_date : 'Publish Date Not Found'} by <strong><i>${newsData?.author?.name ? newsData?.author?.name : 'No Auther'}</i></strong></small></p>
             </div>
         </div>
     `;
