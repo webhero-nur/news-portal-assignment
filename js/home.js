@@ -31,7 +31,7 @@ const homeTab = () => {
                     <img src="https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-1.2.1&amp;ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8dXNlcnxlbnwwfHwwfHw%3D&amp;w=1000&amp;q=80" alt="No image found" style="max-width: 2rem; border-radius: 1rem;">
                     <span class="fw-bolder mx-2">Reuters</span>
                 </div>
-                <span><i class="fa-solid fa-eye"></i> Not Enough ViewK</span>
+                <span><i class="fa-solid fa-eye"></i> No Data Available</span>
                 <span><i class="fa-solid fa-star"></i> 4.5</span>
             </div>
             <button onclick="newsDetails('7c4dfea0fafddc813673282a428429b7')" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#newsModal">Read More</button>

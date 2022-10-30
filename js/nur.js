@@ -13,6 +13,7 @@ const categoriesData = () => {
     fetch('https://openapi.programming-hero.com/api/news/categories')
         .then(res => res.json())
         .then(data => categoryDetailView(data.data.news_category))
+        .catch(e => console.log(e))
 }
 
 const categoryDetailView = categories => {
@@ -50,9 +51,12 @@ const findNewsByCategory = newsId => {
     fetch(findAllNewsByIdURL)
         .then(res => res.json())
         .then(data => showNews(data.data))
+        .catch(e => console.log(e))
+
 }
 
 const showNews = fullNewsAll => {
+    fullNewsAll.sort(compare);
     const cardsContainer = document.getElementById('cards-container');
     if (fullNewsAll.length > 0) {
         fullNewsAll.forEach(fullNews => {
@@ -62,13 +66,13 @@ const showNews = fullNewsAll => {
                 <img src="${fullNews?.image_url}" alt="No image found" class="card-img-top" alt="...">
                 <div class="card-body">
                     <h5 class="card-title">${fullNews?.title}</h5>
-                    <p class="card-text">${fullNews?.details.slice(0, 150) + '...'}</p>
+                    <p class="card-text">${fullNews?.details.length > 500 ? fullNews?.details.slice(0, 500) + '...' : fullNews?.details}</p>
                     <div class="d-flex justify-content-between py-2">
                         <div class="d-flex">
                             <img src="${fullNews?.author?.img}" alt="No image found" style="max-width: 2rem; border-radius: 1rem;">
-                            <span class="fw-bolder mx-2">${fullNews?.author?.name ? fullNews?.author?.name : 'Author Unknown'}</span>
+                            <span class="fw-bolder mx-2">${fullNews?.author?.name ? fullNews?.author?.name : 'No Data Available'}</span>
                         </div>
-                        <span><i class="fa-solid fa-eye"></i> ${fullNews?.total_view ? fullNews?.total_view : 'Not Enough View'}K</span>
+                        <span><i class="fa-solid fa-eye"></i> ${fullNews?.total_view ? fullNews?.total_view + 'K' : 'No Data Available'}</span>
                         <span><i class="fa-solid fa-star"></i> ${fullNews.rating.number}</span>
                     </div>
                     <button onclick=newsDetails('${fullNews._id}') type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#newsModal">Read More</button>
@@ -90,6 +94,7 @@ const newsDetails = newsId => {
     fetch(newsDetailsUrl)
         .then(res => res.json())
         .then(data => newsDetailsModal(data.data[0]))
+        .catch(e => console.log(e))
 }
 
 const newsDetailsModal = newsData => {
@@ -101,10 +106,23 @@ const newsDetailsModal = newsData => {
             <img src="${newsData.image_url}" class="card-img-top" alt="...">
             <div class="card-body">
                 <p class="card-text">${newsData.details}</p>
-                <p><small class="text-secondary">Published on ${newsData?.author?.published_date ? newsData?.author?.published_date : 'Publish Date Not Found'} by <strong><i>${newsData?.author?.name ? newsData?.author?.name : 'No Auther'}</i></strong></small></p>
+                <p><small class="text-secondary">Published on ${newsData?.author?.published_date ? newsData?.author?.published_date : 'No Data Available'} by <strong><i>${newsData?.author?.name ? newsData?.author?.name : 'No Data Available'}</i></strong></small></p>
             </div>
         </div>
     `;
+}
+
+function compare(a, b) {
+    const viewA = a.total_view;
+    const viewB = b.total_view;
+
+    let comparison = 0;
+    if (viewA > viewB) {
+        comparison = 1;
+    } else if (viewA < viewB) {
+        comparison = -1;
+    }
+    return comparison * -1;
 }
 
 categoriesData();
