@@ -12,3 +12,17 @@
 .pointer {
     cursor: pointer;
 }
+
+@media screen and (max-width: 557px) {
+    li {
+        border-radius: 0.25rem;
+    }
+
+    li:nth-child(2n+1) {
+        background-color: rgb(211, 211, 211);
+    }
+
+    li:nth-child(2n) {
+        background-color: rgb(214, 239, 255);
+    }
+}

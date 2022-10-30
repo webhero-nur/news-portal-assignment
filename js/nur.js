@@ -25,7 +25,7 @@ const categoryDetailView = categories => {
     categoriesDiv.appendChild(categoryUl);
 
     const homeLi = document.createElement('li');
-    homeLi.classList.add('pointer', 'px-1');
+    homeLi.classList.add('pointer', 'px-1', 'py-3');
     homeLi.innerHTML = `
         <div onclick=homeTab()>Home</div>
     `;
@@ -33,7 +33,7 @@ const categoryDetailView = categories => {
 
     categories.forEach(category => {
         const li = document.createElement('li');
-        li.classList.add('pointer', 'px-1');
+        li.classList.add('pointer', 'px-1', 'py-3');
         li.innerHTML = `
             <div onclick=findNewsByCategory('${category?.category_id}')>${category?.category_name}</div>
         `;
