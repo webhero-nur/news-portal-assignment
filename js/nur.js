@@ -56,6 +56,7 @@ const findNewsByCategory = newsId => {
 }
 
 const showNews = fullNewsAll => {
+    countShow(fullNewsAll.length);
     fullNewsAll.sort(compare);
     const cardsContainer = document.getElementById('cards-container');
     if (fullNewsAll.length > 0) {
@@ -82,9 +83,7 @@ const showNews = fullNewsAll => {
         });
     }
     else {
-        cardsContainer.innerHTML = `
-            <h2 class="w-100 text-danger">No News Found in this category!!!</h2>
-        `;
+        countShow(0);
     }
     toggleSpinner(false);
 }
@@ -110,19 +109,6 @@ const newsDetailsModal = newsData => {
             </div>
         </div>
     `;
-}
-
-function compare(a, b) {
-    const viewA = a.total_view;
-    const viewB = b.total_view;
-
-    let comparison = 0;
-    if (viewA > viewB) {
-        comparison = 1;
-    } else if (viewA < viewB) {
-        comparison = -1;
-    }
-    return comparison * -1;
 }
 
 categoriesData();
